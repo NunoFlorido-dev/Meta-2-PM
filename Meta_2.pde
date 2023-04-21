@@ -1,9 +1,11 @@
 import processing.sound.*;
+import processing.video.*;
 SoundFile music;
 Visualizador vis;
 FFT fft;
 Headline head;
 ParticleSystem ps;
+Amplitude amp;
 color display_color=color(255);
 int numBands=8;
 PFont font;
@@ -40,6 +42,8 @@ void musicSelected(File musicFile) {
       fft.input(music);
       musicFilename=musicFile.getAbsolutePath();
       head=new Headline(font, musicFilename);
+      amp=new Amplitude(this);
+      amp.input(music);
     }
   }
 }
@@ -47,10 +51,12 @@ void musicSelected(File musicFile) {
 void draw() {
   background(display_color);
   if (activeMusic) {
+    float a=amp.analyze();
+    float m=map(a, 0, 1, 10, 40);
     vis.display(-1);
     vis.display(1);
     ps.addParticle();
-    ps.run();
+    ps.run(m);
     head.display();
   }
 }
