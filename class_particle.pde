@@ -15,7 +15,7 @@ class Particle {
     raio=r;
   }
   boolean isDead() {
-    if (lifespan<0.0) {
+    if (lifespan<0) {
       return true;
     } else {
       return false;

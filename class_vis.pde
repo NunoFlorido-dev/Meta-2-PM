@@ -29,6 +29,7 @@ class Visualizador {
       translate(x, y);
       rotate(i * angleStep + radians(ninetydegrees));
       fill(0, 255-espectro_c, espectro_c, espectro_c);
+      noStroke();
       rect(0, 0, rectSize, rectHeight);
       pop();
       println(espectro_c);

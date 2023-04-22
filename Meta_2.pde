@@ -6,6 +6,8 @@ FFT fft;
 Headline head;
 ParticleSystem ps;
 Amplitude amp;
+BeatDetector beat;
+ArcSystem as;
 color display_color=color(255);
 int numBands=8;
 PFont font;
@@ -16,6 +18,7 @@ void setup() {
   fft=new FFT(this, numBands);
   vis=new Visualizador(fft);
   ps=new ParticleSystem();
+  as=new ArcSystem();
   font=createFont("Popboy", 30);
   textFont(font);
 }
@@ -43,6 +46,8 @@ void musicSelected(File musicFile) {
       musicFilename=musicFile.getAbsolutePath();
       head=new Headline(font, musicFilename);
       amp=new Amplitude(this);
+      beat=new BeatDetector(this);
+      beat.input(music);
       amp.input(music);
     }
   }
@@ -53,6 +58,10 @@ void draw() {
   if (activeMusic) {
     float a=amp.analyze();
     float m=map(a, 0, 1, 10, 40);
+    if (beat.isBeat()) {
+      as.addArco();
+    }
+    as.run();
     vis.display(-1);
     vis.display(1);
     ps.addParticle();
