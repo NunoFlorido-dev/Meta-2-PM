@@ -28,7 +28,7 @@ class Visualizador {
       scale(inverteX, 1);
       translate(x, y);
       rotate(i * angleStep + radians(ninetydegrees));
-      fill(0, 255 - espectro_c, espectro_c, espectro_c);
+      fill(255,255-espectro_c,0);
       noStroke();
       rect(0, 0, rectSize, rectHeight);
       pop();

@@ -15,7 +15,6 @@ String musicFilename;
 boolean activeMusic = false;
 
 void setup() {
-
   background(display_color);
   fft = new FFT(this, numBands);
   vis = new Visualizador(fft);
@@ -26,19 +25,16 @@ void setup() {
 }
 
 void settings() {
-
   int sizeW = 1200;
   int sizeH = 800;
   size(sizeW, sizeH);
 }
 
 void mousePressed() {
-
   selectInput( "Select a music file to open:", "musicSelected" );
 }
 
 void musicSelected(File musicFile) {
-
   if (musicFile == null) {
     println("No music selected");
   } else {
@@ -59,7 +55,6 @@ void musicSelected(File musicFile) {
 }
 
 void draw() {
-
   background(display_color);
   if (activeMusic) {
     float a = amp.analyze();

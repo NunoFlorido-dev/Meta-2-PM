@@ -2,8 +2,8 @@ class Arco {
   float raio, lifespan;
 
   Arco() {
-    raio=0;
-    lifespan=255;
+    raio = 0;
+    lifespan = 255;
   }
 
   boolean isDead() {
