@@ -8,7 +8,8 @@ ParticleSystem ps;
 Amplitude amp;
 BeatDetector beat;
 ArcSystem as;
-color display_color = color(255);
+ArrayList<ParticleFundo> pm = new ArrayList<ParticleFundo>();
+color display_color = color(0, 170, 200);
 int numBands = 8;
 PFont font;
 String musicFilename;
@@ -16,10 +17,15 @@ boolean activeMusic = false;
 
 void setup() {
   background(display_color);
+  colorMode(RGB, 255, 255, 255);
   fft = new FFT(this, numBands);
   vis = new Visualizador(fft);
   ps = new ParticleSystem();
   as = new ArcSystem();
+  for (int i=0; i<6; i++) {
+    PVector l = new PVector(random(200, 1000), random(120, 680));
+    pm.add(i, new ParticleFundo(l));
+  }
   font = createFont("Popboy", 30);
   textFont(font);
 }
@@ -58,7 +64,12 @@ void draw() {
   background(display_color);
   if (activeMusic) {
     float a = amp.analyze();
-    float m = map(a, 0, 1, 10, 40);
+    float mudaAmpMini = map(a, 0, 1, 10, 40);
+    float mudaAmpMax = map(a, 0, 1, 0, 255);
+    for (ParticleFundo p : pm) {
+      p.display();
+      p.update(mudaAmpMax);
+    }
     if (beat.isBeat()) {
       as.addArco();
     }
@@ -66,7 +77,7 @@ void draw() {
     vis.display(-1);
     vis.display(1);
     ps.addParticle();
-    ps.run(m);
+    ps.run(mudaAmpMini);
     head.display();
   }
 }

@@ -2,12 +2,13 @@ class Visualizador {
   float rectHeight, radius, rectSize;
   color vis_color;
   FFT fft_vis;
-  
+
   Visualizador(FFT fft) {
     radius = 200;
     rectSize = 10;
     vis_color = color(0);
     fft_vis = fft;
+
   }
 
   void display(int inverteX) {
@@ -28,7 +29,7 @@ class Visualizador {
       scale(inverteX, 1);
       translate(x, y);
       rotate(i * angleStep + radians(ninetydegrees));
-      fill(255,255-espectro_c,0);
+      fill(255, 255-espectro_c, 0);
       noStroke();
       rect(0, 0, rectSize, rectHeight);
       pop();

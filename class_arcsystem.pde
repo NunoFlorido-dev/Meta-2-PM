@@ -1,7 +1,8 @@
-class ArcSystem {
+class ArcSystem extends ParticleSystem {
   ArrayList<Arco> arcos;
 
   ArcSystem() {
+    super();
     arcos = new ArrayList<Arco>();
   }
 
