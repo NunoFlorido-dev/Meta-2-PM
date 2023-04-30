@@ -11,16 +11,16 @@ class ParticleFundo extends Particle {
   }
   void update(float t) {
     location.add(velocity);
-    if (location.x<0 || location.x>width) {
-      velocity.x=-velocity.x;
-    } else if (location.y>height || location.y<0) {
-      velocity.y=-velocity.y;
+    if (location.x < 0 || location.x > width) {
+      velocity.x =- velocity.x;
+    } else if (location.y > height || location.y < 0) {
+      velocity.y =- velocity.y;
     }
-    bright=t;
+    bright = t;
   }
 
   void display() {
-    fill(c, 255-c2, 0, bright);
+    fill(c, 255 - c2, 0, bright);
     noStroke();
     circle(location.x, location.y, raio);
   }

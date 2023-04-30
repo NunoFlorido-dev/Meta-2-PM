@@ -2,7 +2,7 @@ class ParticleSystem {
   ArrayList<Particle>particles;
 
   ParticleSystem() {
-    particles=new ArrayList<Particle>();
+    particles = new ArrayList<Particle>();
   }
 
   void addParticle() {
