@@ -1,60 +1,86 @@
 import processing.sound.*;
-import processing.video.*;
 SoundFile music;
 Visualizador vis;
 FFT fft;
 Headline head;
 ParticleSystem ps;
 Amplitude amp;
-BeatDetector beat;
-ArcSystem as;
-ArrayList<ParticleFundo> pm = new ArrayList<ParticleFundo>();
-color display_color = color(0, 170, 200);
-int numBands = 8;
+int partMenu=0;
+Menu[] Menu;
+Botao startBotao;
+Botao LoadMusic;
+Botao som;
+Botao pause;
+color display_color=color(255);
+int numBands=8;
+color c1= color(random(150), random(150), random(150));
 PFont font;
 String musicFilename;
-boolean activeMusic = false;
-
+boolean activeMusic=false;
 void setup() {
   background(display_color);
-  colorMode(RGB, 255, 255, 255);
-  fft = new FFT(this, numBands);
-  vis = new Visualizador(fft);
-  ps = new ParticleSystem();
-  as = new ArcSystem();
-  for (int i=0; i<6; i++) {
-    PVector l = new PVector(random(200, 1000), random(120, 680));
-    pm.add(i, new ParticleFundo(l));
-  }
-  font = createFont("Popboy", 30);
+  Menu= new Menu[2];
+  Menu[0]= new MenuIn(c1, c1);
+  Menu[1]= new BarraMenu(c1, c1);
+  fft=new FFT(this, numBands);
+  vis=new Visualizador(fft);
+  ps=new ParticleSystem();
+  amp=new Amplitude(this);
+  font=createFont("Popboy", 30);
   textFont(font);
 }
 
 void settings() {
-  int sizeW = 1200;
-  int sizeH = 800;
+  int sizeW=1200;
+  int sizeH=800;
   size(sizeW, sizeH);
 }
 
 void mousePressed() {
-  selectInput( "Select a music file to open:", "musicSelected" );
+  if (partMenu==0) {
+    if (LoadMusic.colide()==true) {
+      selectInput("Select a music file to open:", "musicSelected");
+    }
+    if (activeMusic==true) {
+      if (startBotao.colide()==true) {
+        partMenu=1;
+        music.loop();
+      }
+    }
+  } else if (partMenu==1) {
+    if (som.colide()==true) {
+      if ( Menu[1].ShowSondAmp==false) {
+        Menu[1].ShowSondAmp=true;
+      } else {
+        Menu[1].ShowSondAmp=false;
+      }
+    }
+    if (pause.colide()==true) {
+      if (music.isPlaying()==true) {
+        music.pause();
+        pause.text=">";
+      } else {
+        music.play();
+        pause.text="| |";
+      }
+      if (music.position()>music.duration()-1) {
+        music.loop();
+      }
+    }
+  }
 }
 
 void musicSelected(File musicFile) {
-  if (musicFile == null) {
+  if (musicFile==null) {
     println("No music selected");
   } else {
     println("Selected music:" + musicFile.getAbsolutePath());
     music=new SoundFile(this, musicFile.getAbsolutePath());
-    activeMusic = true;
-    if (activeMusic == true) {
-      music.loop();
+    activeMusic=true;
+    if (activeMusic==true) {
       fft.input(music);
-      musicFilename = musicFile.getAbsolutePath();
-      head = new Headline(font, musicFilename);
-      amp = new Amplitude(this);
-      beat = new BeatDetector(this);
-      beat.input(music);
+      musicFilename=musicFile.getAbsolutePath();
+      head=new Headline(font, musicFilename);
       amp.input(music);
     }
   }
@@ -62,22 +88,19 @@ void musicSelected(File musicFile) {
 
 void draw() {
   background(display_color);
-  if (activeMusic) {
-    float a = amp.analyze();
-    float mudaAmpMini = map(a, 0, 1, 10, 40);
-    float mudaAmpMax = map(a, 0, 1, 0, 255);
-    for (ParticleFundo p : pm) {
-      p.display();
-      p.update(mudaAmpMax);
-    }
-    if (beat.isBeat()) {
-      as.addArco();
-    }
-    as.run();
+  float a = map(amp.analyze(), 0, 1, 5, 40);
+  if (activeMusic && partMenu==1) {
     vis.display(-1);
     vis.display(1);
     ps.addParticle();
-    ps.run(mudaAmpMini);
+    ps.run(a);
     head.display();
+    Menu[1].desenho();
+    Menu[1].jumpMusic();
+    if (Menu[1].ShowSondAmp==true) {
+      Menu[1].choseAmp();
+    }
+  } else {
+    Menu[0].desenho();
   }
 }
