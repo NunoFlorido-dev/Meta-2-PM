@@ -1,0 +1,102 @@
+import processing.sound.*;
+SoundFile music;
+Visualizador vis;
+FFT fft;
+Headline head;
+ParticleSystem ps;
+int partMenu=0;
+Menu[] Menu;
+Botao startBotao;
+Botao LoadMusic;
+Botao som;
+Botao pause;
+color display_color=color(255);
+int numBands=8;
+color c1= color(random(150), random(150), random(150));
+PFont font;
+String musicFilename;
+boolean activeMusic=false;
+void setup() {
+  background(display_color);
+  Menu= new Menu[2];
+  Menu[0]= new MenuIn(c1, c1);
+  Menu[1]= new BarraMenu(c1, c1);
+  fft=new FFT(this, numBands);
+  vis=new Visualizador(fft);
+  ps=new ParticleSystem();
+  font=createFont("Popboy", 30);
+  textFont(font);
+}
+
+void settings() {
+  int sizeW=1200;
+  int sizeH=800;
+  size(sizeW, sizeH);
+}
+
+void mousePressed() {
+  if (partMenu==0) {
+    if (LoadMusic.colide()==true) {
+      selectInput("Select a music file to open:", "musicSelected");
+    }
+    if (activeMusic==true) {
+      if (startBotao.colide()==true) {
+        partMenu=1;
+        music.loop();
+      }
+    }
+  } else if (partMenu==1) {
+    if (som.colide()==true) {
+      if ( Menu[1].ShowSondAmp==false) {
+        Menu[1].ShowSondAmp=true;
+      } else {
+        Menu[1].ShowSondAmp=false;
+      }
+    }
+    if(pause.colide()==true){
+      if(music.isPlaying()==true){
+        music.pause();
+        pause.text=">";
+      }else{
+        music.play();
+        pause.text="| |";
+      }
+      if(music.position()>music.duration()-1){
+          music.loop();
+        }
+    }
+  }
+}
+
+void musicSelected(File musicFile) {
+  if (musicFile==null) {
+    println("No music selected");
+  } else {
+    println("Selected music:" + musicFile.getAbsolutePath());
+    music=new SoundFile(this, musicFile.getAbsolutePath());
+    activeMusic=true;
+    if (activeMusic==true) {
+      fft.input(music);
+      musicFilename=musicFile.getAbsolutePath();
+      head=new Headline(font, musicFilename);
+    }
+  }
+}
+
+void draw() {
+  background(display_color);
+  if (activeMusic && partMenu==1) {
+    vis.display(-1);
+    vis.display(1);
+    ps.addParticle();
+    ps.run();
+    head.display();
+    Menu[1].desenho();
+    Menu[1].jumpMusic();
+    if (Menu[1].ShowSondAmp==true) {
+      Menu[1].choseAmp();
+    }
+  } else {
+    Menu[0].desenho();
+  }
+}
