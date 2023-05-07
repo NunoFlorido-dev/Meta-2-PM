@@ -7,8 +7,6 @@ ParticleSystem ps;
 Amplitude amp;
 int partMenu=0;
 Menu[] Menu;
-Botao startBotao;
-Botao LoadMusic;
 Botao som;
 Botao pause;
 color display_color=color(255);
@@ -28,6 +26,7 @@ void setup() {
   amp=new Amplitude(this);
   font=createFont("Popboy", 30);
   textFont(font);
+
 }
 
 void settings() {
@@ -38,30 +37,28 @@ void settings() {
 
 void mousePressed() {
   if (partMenu==0) {
-    if (LoadMusic.colide()==true) {
+    if (Menu[0].colideBotao(1)==true) {
       selectInput("Select a music file to open:", "musicSelected");
     }
     if (activeMusic==true) {
-      if (startBotao.colide()==true) {
+      if (Menu[0].colideBotao(0)==true) {
         partMenu=1;
         music.loop();
       }
     }
   } else if (partMenu==1) {
-    if (som.colide()==true) {
+    if (Menu[1].colideBotao(0)==true) {
       if ( Menu[1].ShowSondAmp==false) {
         Menu[1].ShowSondAmp=true;
       } else {
         Menu[1].ShowSondAmp=false;
       }
     }
-    if (pause.colide()==true) {
+    if (Menu[1].colideBotao(1)==true) {
       if (music.isPlaying()==true) {
         music.pause();
-        pause.text=">";
       } else {
         music.play();
-        pause.text="| |";
       }
       if (music.position()>music.duration()-1) {
         music.loop();
