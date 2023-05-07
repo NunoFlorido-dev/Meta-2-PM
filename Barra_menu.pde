@@ -3,6 +3,7 @@ class BarraMenu extends Menu{
   color nFundo;
   Botao MusicPos;
   Botao AmpSom;
+  Botao [] Botao;
   PVector cordsMusic= new PVector(100,19*height/20);
   PVector cordsAmp= new PVector(width-50,height-150);
   PVector cordsSom= new PVector(width-50,19*height/20);
@@ -20,10 +21,12 @@ class BarraMenu extends Menu{
     super(c1,c2);
     fundo=color(c1);
     nFundo=color(255-red(fundo),255-green(fundo),255-blue(fundo));
+    Botao= new Botao[2];
     MusicPos= new Botao(cordsMusic,color(nFundo),color(0),"",30,20);
     AmpSom= new Botao(cordsAmp,color(nFundo),color(0),"",15,20);
-    som=new Botao(cordsSom,color(0),color(0),"",20,20);
-    pause= new Botao (cordsPause, color(0), color(nFundo), stopPause,20,20);
+    //btao 0 = som Botao 1= pause
+    Botao[0]=new Botao(cordsSom,color(0),color(0),"",20,20);
+    Botao[1]= new Botao (cordsPause, color(0), color(nFundo), stopPause,20,20);
   }
   void desenho(){
     if(MenuOP()==true || ShowSondAmp==true){
@@ -36,8 +39,13 @@ class BarraMenu extends Menu{
       fill(fundo);
       MusicPos.cords.x=pos;
       MusicPos.desenha();
-      som.desenha();
-      pause.desenha();
+      Botao[0].desenha();
+      Botao[1].desenha();
+      if(music.isPlaying()==true) {
+        Botao[1].text="| |";
+      }else{
+         Botao[1].text=">";
+      }
     }
   }
   void choseAmp(){
@@ -69,5 +77,11 @@ class BarraMenu extends Menu{
       }
     }
   }
-  
+    boolean colideBotao(int a){
+    if(Botao[a].colide()==true){
+      return true;
+    }else{
+      return false;
+    }
+  }
 }
