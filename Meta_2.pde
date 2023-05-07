@@ -9,6 +9,8 @@ int partMenu=0;
 Menu[] Menu;
 Botao som;
 Botao pause;
+ArrayList<ParticleFundo> pf = new ArrayList<ParticleFundo>();
+color display_vis=color(0, 200, 170);
 color display_color=color(255);
 int numBands=8;
 color c1= color(random(150), random(150), random(150));
@@ -24,9 +26,11 @@ void setup() {
   vis=new Visualizador(fft);
   ps=new ParticleSystem();
   amp=new Amplitude(this);
+  for (int i=0; i<4; i++) {
+    pf.add(new ParticleFundo(new PVector(random(300, 900), random(200, 600))));
+  }
   font=createFont("Popboy", 30);
   textFont(font);
-
 }
 
 void settings() {
@@ -86,11 +90,16 @@ void musicSelected(File musicFile) {
 void draw() {
   background(display_color);
   float a = map(amp.analyze(), 0, 1, 5, 40);
+  float a_bright = map(amp.analyze(), 0, 1, 0, 255);
   if (activeMusic && partMenu==1) {
+    background(display_vis);
     vis.display(-1);
     vis.display(1);
     ps.addParticle();
     ps.run(a);
+    for(ParticleFundo p: pf){
+    p.display();
+    p.update(a_bright);}
     head.display();
     Menu[1].desenho();
     Menu[1].jumpMusic();
