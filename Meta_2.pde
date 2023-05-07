@@ -93,13 +93,13 @@ void draw() {
   float a_bright = map(amp.analyze(), 0, 1, 0, 255);
   if (activeMusic && partMenu==1) {
     background(display_vis);
+    for(ParticleFundo p: pf){
+    p.display();
+    p.update(a_bright);}
     vis.display(-1);
     vis.display(1);
     ps.addParticle();
     ps.run(a);
-    for(ParticleFundo p: pf){
-    p.display();
-    p.update(a_bright);}
     head.display();
     Menu[1].desenho();
     Menu[1].jumpMusic();
