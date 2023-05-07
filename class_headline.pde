@@ -31,6 +31,7 @@ class Headline {
 
   void display() {
     fill(0);
+    textSize(35);
     text(conc, textVector.x, textVector.y);
     update();
   }
