@@ -1,13 +1,15 @@
-class Visualizador {
+class BarrasEspectro {
   float rectHeight, radius, rectSize;
   color vis_color;
   FFT fft_vis;
+  int numBands;
 
-  Visualizador(FFT fft) {
+  BarrasEspectro(FFT fft, int num) {
     radius = 200;
     rectSize = 10;
     vis_color = color(0);
     fft_vis = fft;
+    numBands = num;
   }
 
   void display(int inverteX) {

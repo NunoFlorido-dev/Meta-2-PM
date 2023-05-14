@@ -4,6 +4,7 @@ class BarraMenu extends Menu{
   Botao MusicPos;
   Botao AmpSom;
   Botao [] Botao;
+  SoundFile music;
   PVector cordsMusic= new PVector(100,19*height/20);
   PVector cordsAmp= new PVector(width-50,height-150);
   PVector cordsSom= new PVector(width-50,19*height/20);
@@ -17,8 +18,9 @@ class BarraMenu extends Menu{
       return false;
     }
   }
-  BarraMenu(color c1, color c2){
+  BarraMenu(color c1, color c2, SoundFile music){
     super(c1,c2);
+    this.music = music;
     fundo=color(c1);
     nFundo=color(255-red(fundo),255-green(fundo),255-blue(fundo));
     Botao= new Botao[2];
@@ -49,7 +51,7 @@ class BarraMenu extends Menu{
     }
   }
   void choseAmp(){
-    fill(c1);
+    fill(fundo);
     rect(width-70,height-160,40,70);
     fill(0);
     rect(width-55,height-150,10,50);
