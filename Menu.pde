@@ -1,4 +1,4 @@
-class Menu {
+class MenuVis2 {
   color fundo;
   color letras;
   boolean ShowSondAmp;
@@ -10,7 +10,7 @@ class Menu {
       return false;
     }
   }
-  Menu(color c1, color c2) {
+  MenuVis2(color c1, color c2) {
     fundo=color(c1);
     fundo=color(c2);
   }

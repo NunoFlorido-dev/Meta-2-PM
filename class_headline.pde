@@ -7,6 +7,7 @@ class Headline {
   int vel;
 
   Headline(PFont font_input, String musicFilename) {
+    textAlign(LEFT);
     font = font_input;
     fileName = musicFilename;
     xText = width;

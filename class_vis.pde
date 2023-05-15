@@ -3,7 +3,6 @@ class BarrasEspectro {
   color vis_color;
   FFT fft_vis;
   int numBands;
-
   BarrasEspectro(FFT fft, int num) {
     radius = 200;
     rectSize = 10;

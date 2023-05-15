@@ -1,4 +1,4 @@
-class BarraMenu extends Menu {
+class BarraMenu extends MenuVis2 {
   color fundo;
   color nFundo;
   Botao MusicPos;

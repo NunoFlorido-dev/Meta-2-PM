@@ -1,4 +1,4 @@
-class MenuIn extends Menu {
+class MenuIn extends MenuVis2 {
   color back;
   PVector cordsBotaoPlay= new PVector(width/2, height/2-20);
   PVector cordsBotaoLoadMusic=new PVector(width/2, height/2+80);

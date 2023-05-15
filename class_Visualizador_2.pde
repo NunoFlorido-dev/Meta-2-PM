@@ -11,16 +11,17 @@ class Visualizador2 {
   color display_vis;
   int numBands;
   color c1;
-  PFont font;
+  PFont fonte;
   String musicFilename;
   boolean activeMusic=false;
   color display_color=color(255);
   //variaveis do menu
   int partMenu;
-  Menu[] Menu;
+  MenuVis2[] menu = new MenuVis2[2];
   Botao som;
   Botao pause;
   Visualizador2() {
+    colorMode(RGB, 255, 255, 255);
     partMenu=0;
     numBands=8;
     pf = new ArrayList<ParticleFundo>();
@@ -29,38 +30,35 @@ class Visualizador2 {
     this.fft = new FFT(Meta_2.this, numBands);
     this.amp = new Amplitude(Meta_2.this);
     c1= color(random(150), random(150), random(150));
-    Menu= new Menu[2];
-    Menu[0]= new MenuIn(c1, c1);
-    barras=new BarrasEspectro(fft, numBands);
+    menu = new MenuVis2[2];
+    menu[0]= new MenuIn(c1, c1);
     ps = new ParticleSystem();
     for (int i=0; i<4; i++) {
       pf.add(new ParticleFundo
         (new PVector(random(300, 900), random(200, 600))));
     }
-    font=createFont("Popboy", 30);
-    textFont(font);
   }
 
   void mousePressed() {
     if (partMenu==0) {
-      if (Menu[0].colideBotao(1)==true) {
+      if (menu[0].colideBotao(1)==true) {
         selectInput("Select a music file to open:", "musicSelected");
       }
       if (activeMusic==true) {
-        if (Menu[0].colideBotao(0)==true) {
+        if (menu[0].colideBotao(0)==true) {
           partMenu=1;
           music.loop();
         }
       }
     } else if (partMenu==1) {
-      if (Menu[1].colideBotao(0)==true) {
-        if ( Menu[1].ShowSondAmp==false) {
-          Menu[1].ShowSondAmp=true;
+      if (menu[1].colideBotao(0)==true) {
+        if ( menu[1].ShowSondAmp==false) {
+          menu[1].ShowSondAmp=true;
         } else {
-          Menu[1].ShowSondAmp=false;
+          menu[1].ShowSondAmp=false;
         }
       }
-      if (Menu[1].colideBotao(1)==true) {
+      if (menu[1].colideBotao(1)==true) {
         if (music.isPlaying()==true) {
           music.pause();
         } else {
@@ -84,12 +82,14 @@ class Visualizador2 {
       if (this.activeMusic) {
         this.fft.input(this.music);
         this.musicFilename = musicFile.getAbsolutePath();
-        Menu[1]= new BarraMenu(c1, c1, music);
-        this.head = new Headline(this.font, this.musicFilename);
+        menu[1]= new BarraMenu(c1, c1, music);
+        this.head = new Headline(this.fonte, this.musicFilename);
         this.amp.input(this.music);
+        barras=new BarrasEspectro(fft, numBands);
       }
     }
   }
+
 
   void displayVis() {
     background(display_color);
@@ -101,18 +101,19 @@ class Visualizador2 {
         p.display();
         p.update(a_bright);
       }
+      if(music.isPlaying()){
       barras.display(-1);
-      barras.display(1);
+      barras.display(1);}
       ps.addParticle();
       ps.run(a);
       head.display();
-      Menu[1].desenho();
-      Menu[1].jumpMusic();
-      if (Menu[1].ShowSondAmp==true) {
-        Menu[1].choseAmp();
+      menu[1].desenho();
+      menu[1].jumpMusic();
+      if (menu[1].ShowSondAmp==true) {
+        menu[1].choseAmp();
       }
     } else {
-      Menu[0].desenho();
+      menu[0].desenho();
     }
   }
 }
