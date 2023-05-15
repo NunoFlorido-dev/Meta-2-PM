@@ -17,7 +17,7 @@ class Arco {
     float xcenter = width/2;
     float ycenter = height/2;
     strokeWeight(4);
-    stroke(0,0,255, lifespan);
+    stroke(0, 0, 255, lifespan);
     noFill();
     circle(xcenter, ycenter, raio);
   }

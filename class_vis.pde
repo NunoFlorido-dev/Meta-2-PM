@@ -20,8 +20,10 @@ class BarrasEspectro {
     translate(xcenter, ycenter);
     float[] espectro = fft_vis.analyze();
     for (int i = 0; i < numBands; i++) {
-      float espectro_c = map(espectro[i], min(espectro), max(espectro), 0, 255);
-      rectHeight = map(espectro[i], min(espectro), max(espectro), 0, 300);
+      float espectro_c = map(espectro[i], min(espectro),
+        max(espectro), 0, 255);
+      rectHeight = map(espectro[i], min(espectro),
+        max(espectro), 0, 300);
       float angleStep = (PI/4) / numBands;
       float setAng = 3*(PI/4) + TWO_PI/8;
       float x = radius * cos((i * angleStep) + setAng);

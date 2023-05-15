@@ -9,13 +9,13 @@ void settings() {
   int sizeH=800;
   size(sizeW, sizeH);
 }
-void musicSelected(File musicFile){
+void musicSelected(File musicFile) {
   vis2.musicSelected(musicFile);
 }
 void mousePressed() {
- vis2.mousePressed();
+  vis2.mousePressed();
 }
-  
+
 void draw() {
   vis2.displayVis();
 }

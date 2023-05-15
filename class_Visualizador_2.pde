@@ -34,7 +34,8 @@ class Visualizador2 {
     barras=new BarrasEspectro(fft, numBands);
     ps = new ParticleSystem();
     for (int i=0; i<4; i++) {
-      pf.add(new ParticleFundo(new PVector(random(300, 900), random(200, 600))));
+      pf.add(new ParticleFundo
+        (new PVector(random(300, 900), random(200, 600))));
     }
     font=createFont("Popboy", 30);
     textFont(font);
@@ -75,8 +76,10 @@ class Visualizador2 {
     if (musicFile == null) {
       println("No music selected");
     } else {
-      println("Selected music: " + musicFile.getAbsolutePath());
-      this.music = new SoundFile(Meta_2.this, musicFile.getAbsolutePath());
+      println("Selected music: " +
+        musicFile.getAbsolutePath());
+      this.music = new SoundFile(Meta_2.this,
+        musicFile.getAbsolutePath());
       this.activeMusic = true;
       if (this.activeMusic) {
         this.fft.input(this.music);

@@ -1,13 +1,6 @@
-class MenuVis{
- 
-  
- MenuVis(){
-  
-   
-   
- }
- 
- 
- 
- 
+class MenuVis {
+
+
+  MenuVis() {
+  }
 }
