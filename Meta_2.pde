@@ -6,12 +6,10 @@ boolean chooseVis = true;
 int visNum;
 PFont fonteVis1;
 PFont fonteVis2;
-PFont fontBothVis;
 void setup() {
   colorMode(RGB, 255, 255, 255);
   fonteVis1 = createFont("Heal The Web A", 16);
   fonteVis2 = createFont("Popboy", 30);
-  fontBothVis = fonteVis2;
   visNum = -1;
   menuvis = new MenuVisAll(fonteVis1, fonteVis2);
   vis1=new Visualizador1();
