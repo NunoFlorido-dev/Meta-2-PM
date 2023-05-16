@@ -43,12 +43,9 @@ void mousePressed() {
   }
   if (visNum == 1) {
     vis1.mousePressed();
-    fontBothVis = fonteVis1;
-    println("Font set to: " + fontBothVis);
     chooseVis = false;
   } else if (visNum == 2) {
     vis2.mousePressed();
-    fontBothVis = fonteVis2;
     chooseVis = false;
   }
 }
