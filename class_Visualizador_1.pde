@@ -180,6 +180,9 @@ class Visualizador1 {
             musica.pause();
           }
         }
+        if(ativaImagem){
+          if(altImage.insideTheImage(img)){
+           img.save("modified_image");}}
       }
     }
   }
