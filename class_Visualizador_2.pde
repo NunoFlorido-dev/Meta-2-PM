@@ -115,11 +115,11 @@ class Visualizador2 {
       ps.addParticle();
       ps.run(a);
       head.display();
-      menu[1].desenho();
       classBoneco.eyesrast();
-      classBoneco.changeSat(a);
+      classBoneco.changeSat(a1);
       classBoneco.desenho();
       classBoneco.eyesmove(a1,espectro[1]);
+      menu[1].desenho();
       menu[1].jumpMusic();
       if (menu[1].ShowSondAmp==true) {
         menu[1].choseAmp();
