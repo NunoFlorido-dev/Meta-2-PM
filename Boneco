@@ -50,13 +50,12 @@ PImage boneco;
     aa.get(0).x=Lolhos;
     aa.get(0).y=altOlhos;
   }
-  void eyesmove(float a, float h) {
-    Lolhos=300+int(a*600);
+   void eyesmove(float a, float h) {
+    Lolhos=300+int(a*700);
     altOlhos=int(map(Lolhos, 0, olhos.width, 0, olhos.height));
     for (int i=0; i<olhos.width; i++) {
       for (int j=0; j<olhos.height; j++) {
         int loc=i+j*olhos.width;
-        colorMode(ARGB);
         if (alpha(olhos.pixels[loc])>70) {
           colorMode(HSB);
           if (saturation(olhos.pixels[loc])>25) {
@@ -76,20 +75,20 @@ PImage boneco;
     }
   }
   void desenho() {
-    float h=  amp.analyze();
     imageMode(CENTER);
-    image(boneco, width/2, height-150, boneco.width/7, boneco.height/7);
+    image(boneco, width/2, height-240, boneco.width/7, boneco.height/7);
     for (int i=0; i<imgs.length; i++) {
-      image(imgs[i],width/2-10,height-330, aa.get(i).x, aa.get(i).y);
+      image(imgs[i], width/2+5, height-330, aa.get(i).x, aa.get(i).y);
     }
-    image(olhos, width/2-10, height-330, Lolhos, altOlhos);
+    image(olhos, width/2+5, height-330, Lolhos, altOlhos);
     for (int i=0; i<5; i++) {
       noStroke();
-      int a=int(map(h,0,1,4,50));
-      estrela(a,80-i*10,70-i*10,width/2-20, height+30,c1);
+      int a=int(map(amp.analyze(), 0, 1, 4, 50));
+      estrela(a, 90-i*15, 80-i*15, width/2-20, height+30, c1);
     }
   }
 }
+
 
 void estrela(int nVertices,int raio1, int raio2,int cordsX,int cordsY,color c1){
   beginShape();
