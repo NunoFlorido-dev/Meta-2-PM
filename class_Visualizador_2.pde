@@ -4,8 +4,10 @@ class Visualizador2 {
   BarrasEspectro barras;
   FFT fft;
   Amplitude amp;
+  BeatDetector beat;
   //variaveis do visualizador
   Headline head;
+  boneco classBoneco;
   ParticleSystem ps;
   ArrayList<ParticleFundo> pf;
   color display_vis;
@@ -27,8 +29,9 @@ class Visualizador2 {
     pf = new ArrayList<ParticleFundo>();
     display_vis=color(0, 200, 170);
     activeMusic=false;
-    this.fft = new FFT(Meta_2.this, numBands);
+    this.fft = new FFT(Meta_2.this, 8);
     this.amp = new Amplitude(Meta_2.this);
+    beat=new BeatDetector(Meta_2.this);
     c1= color(random(150), random(150), random(150));
     menu = new MenuVis2[2];
     menu[0]= new MenuIn(c1, c1);
@@ -37,6 +40,8 @@ class Visualizador2 {
       pf.add(new ParticleFundo
         (new PVector(random(300, 900), random(200, 600))));
     }
+    classBoneco= new boneco();
+    classBoneco.eyesrastsetup();
   }
 
   void mousePressed() {
@@ -80,6 +85,7 @@ class Visualizador2 {
         musicFile.getAbsolutePath());
       this.activeMusic = true;
       if (this.activeMusic) {
+        this.beat.input(this.music);
         this.fft.input(this.music);
         this.musicFilename = musicFile.getAbsolutePath();
         menu[1]= new BarraMenu(c1, c1, music);
@@ -96,6 +102,8 @@ class Visualizador2 {
     if (activeMusic && partMenu==1) {
       float a = map(amp.analyze(), 0, 1, 5, 40);
       float a_bright = map(amp.analyze(), 0, 1, 0, 255);
+      float[] espectro=fft.analyze();
+  float a1=amp.analyze();
       background(display_vis);
       for (ParticleFundo p : pf) {
         p.display();
@@ -108,6 +116,10 @@ class Visualizador2 {
       ps.run(a);
       head.display();
       menu[1].desenho();
+      classBoneco.eyesrast();
+      classBoneco.changeSat(a);
+      classBoneco.desenho();
+      classBoneco.eyesmove(a1,espectro[1]);
       menu[1].jumpMusic();
       if (menu[1].ShowSondAmp==true) {
         menu[1].choseAmp();
