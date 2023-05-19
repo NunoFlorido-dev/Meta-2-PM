@@ -73,6 +73,9 @@ class Visualizador2 {
           music.loop();
         }
       }
+      if(menu[1].colideBotao(2)==true){
+        menu[0].BackToChose();
+      }
     }
   }
   void musicSelected(File musicFile) {
