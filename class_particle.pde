@@ -13,7 +13,7 @@ class Particle {
 
   void update(float r) {
     location.add(velocity);
-    lifespan -= 2;
+    lifespan -= 3;
     raio = r;
   }
 

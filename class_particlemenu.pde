@@ -20,6 +20,7 @@ class ParticleFundo extends Particle {
   }
 
   void display() {
+    colorMode(RGB,255,255,255);
     fill(c, 255 - c2, 0, bright);
     noStroke();
     circle(location.x, location.y, raio);

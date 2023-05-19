@@ -14,6 +14,7 @@ void setup() {
   menuvis = new MenuVisAll(fonteVis1, fonteVis2);
   vis1=new Visualizador1();
   vis2=new Visualizador2();
+  frameRate(30);
 }
 
 void settings() {

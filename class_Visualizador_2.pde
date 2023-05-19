@@ -31,7 +31,7 @@ class Visualizador2 {
     activeMusic=false;
     this.fft = new FFT(Meta_2.this, 8);
     this.amp = new Amplitude(Meta_2.this);
-    beat=new BeatDetector(Meta_2.this);
+    this.beat=new BeatDetector(Meta_2.this);
     c1= color(random(150), random(150), random(150));
     menu = new MenuVis2[2];
     menu[0]= new MenuIn(c1, c1);
@@ -103,25 +103,28 @@ class Visualizador2 {
   void displayVis() {
     background(display_color);
     if (activeMusic && partMenu==1) {
-      float a = map(amp.analyze(), 0, 1, 5, 40);
-      float a_bright = map(amp.analyze(), 0, 1, 0, 255);
+      float amplitude = amp.analyze();
+      float a = map(amplitude, 0, 1, 5, 40);
+      float a_bright = map(amplitude, 0, 1, 0, 255);
       float[] espectro=fft.analyze();
-  float a1=amp.analyze();
       background(display_vis);
+      
       for (ParticleFundo p : pf) {
         p.display();
         p.update(a_bright);
       }
-      if(music.isPlaying()){
-      barras.display(-1);
-      barras.display(1);}
+      if (music.isPlaying()) {
+        barras.display(-1);
+        barras.display(1);
+      }
+      
       ps.addParticle();
       ps.run(a);
       head.display();
       classBoneco.eyesrast();
-      classBoneco.changeSat(a1);
+      classBoneco.changeSat(amplitude);
       classBoneco.desenho();
-      classBoneco.eyesmove(a1,espectro[1]);
+      classBoneco.eyesmove(amplitude, espectro[1]);
       menu[1].desenho();
       menu[1].jumpMusic();
       if (menu[1].ShowSondAmp==true) {
