@@ -20,4 +20,8 @@ class MenuVis2 {
   }
   void choseAmp() {
   }
+  void BackToChose(){
+    chooseVis=true;
+    visNum=0;
+  }
 }
