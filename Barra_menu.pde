@@ -9,6 +9,7 @@ class BarraMenu extends MenuVis2 {
   PVector cordsAmp= new PVector(width-50, height-150);
   PVector cordsSom= new PVector(width-50, 19*height/20);
   PVector cordsPause= new PVector(width/2, height-60);
+  PVector cordsBack= new PVector(50,19*height/20);
   boolean ShowSondAmp=false;
   String stopPause= "| |";
   boolean MenuOP() {
@@ -23,14 +24,14 @@ class BarraMenu extends MenuVis2 {
     this.music = music;
     fundo=color(c1);
     nFundo=color(255-red(fundo), 255-green(fundo), 255-blue(fundo));
-    Botao= new Botao[2];
+    Botao= new Botao[3];
     MusicPos= new Botao(cordsMusic, color(nFundo),
       color(0), "", 30, 20);
     AmpSom= new Botao(cordsAmp, color(nFundo), color(0), "", 15, 20);
     //btao 0 = som Botao 1= pause
     Botao[0]=new Botao(cordsSom, color(0), color(0), "", 20, 20);
-    Botao[1]= new Botao (cordsPause, color(0), color(nFundo),
-      stopPause, 20, 20);
+    Botao[1]= new Botao (cordsPause, color(0), color(nFundo),stopPause, 20, 20);
+    Botao[2]= new Botao(cordsBack, color(0),color(nFundo),"<-",20,80);
   }
   void desenho() {
     if (MenuOP()==true || ShowSondAmp==true) {
@@ -43,14 +44,17 @@ class BarraMenu extends MenuVis2 {
       fill(fundo);
       MusicPos.cords.x=pos;
       MusicPos.desenha();
+      for(int i=0; i<3; i++){
       Botao[0].desenha();
       Botao[1].desenha();
+       Botao[2].desenha();
       if (music.isPlaying()==true) {
         Botao[1].text="| |";
       } else {
         Botao[1].text=">";
       }
     }
+  }
   }
   void choseAmp() {
     fill(fundo);
