@@ -79,6 +79,8 @@ class BarraMenu extends MenuVis2 {
       textSize(15);
       fill(255);
       text(mins+"."+segs, mouseX-10, mouseY-10);
+    }
+    if(mouseX>100 && mouseX< width-100 && mouseY> 19*height/20 && mouseY<19*height/20+15){
       if (mousePressed) {
         float pos= map(mouseX, 100, width-100, 0, music.duration());
         music.jump(pos);
