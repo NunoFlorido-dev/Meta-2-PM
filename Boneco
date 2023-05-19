@@ -76,7 +76,7 @@ PImage boneco;
   }
   void desenho() {
     imageMode(CENTER);
-    image(boneco, width/2, height-240, boneco.width/7, boneco.height/7);
+    image(boneco, width/2+20, height-215, 476, 519);
     for (int i=0; i<imgs.length; i++) {
       image(imgs[i], width/2+5, height-330, aa.get(i).x, aa.get(i).y);
     }
