@@ -2,18 +2,23 @@ import processing.sound.*;
 Visualizador1 vis1;
 Visualizador2 vis2;
 MenuVisAll menuvis;
-boolean chooseVis = true;
 int visNum;
 PFont fonteVis1;
 PFont fonteVis2;
+boolean chooseVis = true;
 void setup() {
   colorMode(RGB, 255, 255, 255);
   fonteVis1 = createFont("Heal The Web A", 16);
   fonteVis2 = createFont("Popboy", 30);
-  visNum = -1;
+  visNum = 0;
   menuvis = new MenuVisAll(fonteVis1, fonteVis2);
   vis1=new Visualizador1();
   vis2=new Visualizador2();
+  if (visNum == 0) {
+    chooseVis = true;
+  } else {
+    chooseVis = false;
+  }
   frameRate(30);
 }
 
@@ -35,39 +40,42 @@ void imageSelected(File imageFile) {
   }
 }
 void mousePressed() {
-  if (chooseVis) {
+  if (visNum == 0) {
     if (menuvis.mouseHover()) {
       visNum = 1;
+      chooseVis = false;
     } else {
       visNum = 2;
+      chooseVis = false;
     }
   }
-  if (visNum == 1) {
-    vis1.mousePressed();
-    chooseVis = false;
-  } else if (visNum == 2) {
-    vis2.mousePressed();
-    chooseVis = false;
+  if (!chooseVis) {
+    if (visNum == 1) {
+      vis1.mousePressed();
+    } else if (visNum == 2) {
+      vis2.mousePressed();
+    }
   }
 }
 
 
+
 void keyPressed() {
-  if (visNum == 1) {
-    vis1.keyPressed();
+  if (!chooseVis) {
+    if (visNum == 1) {
+      vis1.keyPressed();
+    }
   }
 }
 void draw() {
   background(255);
-  if (chooseVis) {
+  if (visNum == 0) {
     menuvis.display();
-  } else {
-    if (visNum == 1) {
-      textFont(fonteVis1);
-      vis1.displayVis();
-    } else if (visNum == 2) {
-      textFont(fonteVis2);
-      vis2.displayVis();
-    }
+  } else if (visNum == 1) {
+    textFont(fonteVis1);
+    vis1.displayVis();
+  } else if (visNum == 2) {
+    textFont(fonteVis2);
+    vis2.displayVis();
   }
 }

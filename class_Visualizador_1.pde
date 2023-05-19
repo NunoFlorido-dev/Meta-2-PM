@@ -108,8 +108,8 @@ class Visualizador1 {
               } else if (altImage.nVersão==4) {
                 altImage.versão4(espectro[2], espectro[5], img, beat);
               } else if (altImage.nVersão==5) {
-                altImage.versão5(espectro[int(a*8)], 
-                espectro[7], espectro[1], espectro[5], espectro[2], img, beat);
+                altImage.versão5(espectro[int(a*8)],
+                  espectro[7], espectro[1], espectro[5], espectro[2], img, beat);
               } else if (altImage.nVersão==6) {
                 altImage.versão6(img);
               }
@@ -138,6 +138,7 @@ class Visualizador1 {
     //booleans dos respetivos elementos do menu e o que ocorre se se premir o rato
     if (menu.menuativa==true) {
       //mudança da cor do menu
+      menu.chooseVis();
       if (menu.dentroRed()) {
         menu.cormenu=menu.cormenuA;
         menu.corFundo=menu.corFundoA;
@@ -180,15 +181,17 @@ class Visualizador1 {
             musica.pause();
           }
         }
-        if(ativaImagem){
-          if(altImage.insideTheImage(img)){
-           img.save("modified_image");}}
+        if (ativaImagem) {
+          if (altImage.insideTheImage(img)) {
+            img.save("modified_image");
+          }
+        }
       }
     }
   }
   void keyPressed() {
     // Escolher versão do visualizador
-    int version = key - '0'; 
+    int version = key - '0';
     if (version >= 1 && version <= 6) {
       altImage.nVersão = version;
     }

@@ -1,4 +1,4 @@
-  class MenuVisAll {
+class MenuVisAll {
   PFont meta1Fonte, meta2Fonte;
   MenuVisAll(PFont fonte1, PFont fonte2) {
     colorMode(RGB, 255, 255, 255);
@@ -28,7 +28,7 @@
     }
   }
   void display() {
-    colorMode(RGB,255,255,255);
+    colorMode(RGB, 255, 255, 255);
     color blue = color(0, 0, 200);
     color blueHover = color(0, 0, 255);
     color red = color(200, 0, 0);
