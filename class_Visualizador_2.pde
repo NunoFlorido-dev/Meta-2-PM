@@ -75,6 +75,7 @@ class Visualizador2 {
       }
       if(menu[1].colideBotao(2)==true){
         menu[0].BackToChose();
+        music.stop();
       }
     }
   }

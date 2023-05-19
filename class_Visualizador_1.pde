@@ -158,6 +158,9 @@ class Visualizador1 {
         selectInput("Select a music file to open:", "musicSelected");
       }
       if (ativaMusica) {
+        if(menu.insideReturn()){
+          musica.stop();
+        }
         if (menu.dentroPausa()) {
           if (musica.isPlaying()) {
             musica.pause();
