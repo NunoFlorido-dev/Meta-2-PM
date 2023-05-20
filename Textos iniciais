@@ -1,0 +1,25 @@
+class StartTexts{
+  String[] linhas;
+  float[] cordsY;
+  StartTexts(){
+    linhas= loadStrings("texto PM.txt");
+    cordsY= new float[linhas.length];
+    for(int i=0; i<linhas.length; i++){
+      cordsY[i]=i*30;
+    }
+  }
+  void desenho(){
+    for(int i=0; i<linhas.length; i++){
+      cordsY[i]=cordsY[i]+1.5;
+      if(cordsY[i]>height){
+        cordsY[i]=0;
+      }
+    }
+    background(0);
+    fill(255);
+    textSize(20);
+    for( int linha=0; linha<linhas.length; linha++){
+    text(linhas[linha],width/2,cordsY[linha]);
+    }
+}
+}
