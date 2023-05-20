@@ -1,6 +1,7 @@
 import processing.sound.*;
 Visualizador1 vis1;
 Visualizador2 vis2;
+StartTexts StartTexts;
 MenuVisAll menuvis;
 int visNum;
 PFont fonteVis1;
@@ -10,10 +11,11 @@ void setup() {
   colorMode(RGB, 255, 255, 255);
   fonteVis1 = createFont("Heal The Web A", 16);
   fonteVis2 = createFont("Popboy", 30);
-  visNum = 0;
+  visNum = -1;
   menuvis = new MenuVisAll(fonteVis1, fonteVis2);
   vis1=new Visualizador1();
   vis2=new Visualizador2();
+  StartTexts= new StartTexts();
   if (visNum == 0) {
     chooseVis = true;
   } else {
@@ -61,6 +63,9 @@ void mousePressed() {
 
 
 void keyPressed() {
+  if(visNum==-1){
+    visNum=0;
+  }
   if (!chooseVis) {
     if (visNum == 1) {
       vis1.keyPressed();
@@ -69,7 +74,9 @@ void keyPressed() {
 }
 void draw() {
   background(255);
-  if (visNum == 0) {
+  if(visNum==-1){
+    StartTexts.desenho();
+  }else if (visNum == 0) {
     menuvis.display();
   } else if (visNum == 1) {
     textFont(fonteVis1);
