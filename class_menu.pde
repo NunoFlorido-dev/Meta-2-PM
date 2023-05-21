@@ -8,6 +8,7 @@ class MenuMeta1 {
   int lineW, circleX, menuW, imageSize1, imageSize2, circleRaio;
   boolean ativaMusica;
   MenuMeta1(boolean ativaMusica) {
+    colorMode(HSB, 360, 100, 100);
     this.ativaMusica = ativaMusica;
     //inicialização das variáveis dos elementos do menu
     lineW=175;
@@ -109,10 +110,18 @@ class MenuMeta1 {
       return false;
     }
   }
-  void chooseVis(){
-    if(insideReturn()){
-     visNum = 0;
+  void chooseVis() {
+    if (insideReturn()) {
+      visNum = 0;
     }
+  }
+  void musicPos() {
+    noStroke();
+    fill(white);
+    circle(lineX, 240, 10);
+    strokeWeight(2);
+    stroke(white);
+    line(25, 240, lineX, 240);
   }
   void display() {
     //função que dá load às imagens do menu
@@ -147,14 +156,7 @@ class MenuMeta1 {
       strokeWeight(2);
       line(25, 240, lineW, 240);
       //circulo da pos
-      if (ativaMusica==true) {
-        noStroke();
-        fill(white);
-        circle(lineX, 240, 10);
-        strokeWeight(2);
-        stroke(white);
-        line(25, 240, lineX, 240);
-      }
+
       //barras de input da imagem e música
       noStroke();
       fill(white);

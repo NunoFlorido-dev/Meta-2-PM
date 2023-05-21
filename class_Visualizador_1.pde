@@ -130,6 +130,10 @@ class Visualizador1 {
     }
     //display do menu
     menu.display();
+    if (ativaMusica==true) {
+      if(menu.menuativa){
+      menu.musicPos();
+    }}
   }
   void mousePressed() {
     if (removeNotice==true) {
@@ -158,7 +162,7 @@ class Visualizador1 {
         selectInput("Select a music file to open:", "musicSelected");
       }
       if (ativaMusica) {
-        if(menu.insideReturn()){
+        if (menu.insideReturn()) {
           musica.stop();
         }
         if (menu.dentroPausa()) {

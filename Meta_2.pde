@@ -7,6 +7,7 @@ int visNum;
 PFont fonteVis1;
 PFont fonteVis2;
 boolean chooseVis = true;
+boolean ativaText = true;
 void setup() {
   colorMode(RGB, 255, 255, 255);
   fonteVis1 = createFont("Heal The Web A", 16);
@@ -42,7 +43,13 @@ void imageSelected(File imageFile) {
   }
 }
 void mousePressed() {
+  boolean ativaMainMenu = false;
+  if(visNum == -1){
+    ativaMainMenu = !ativaMainMenu;
+   visNum = 0;
+  }
   if (visNum == 0) {
+    if(!ativaMainMenu){
     if (menuvis.mouseHover()) {
       visNum = 1;
       chooseVis = false;
@@ -50,7 +57,7 @@ void mousePressed() {
       visNum = 2;
       chooseVis = false;
     }
-  }
+  }}
   if (!chooseVis) {
     if (visNum == 1) {
       vis1.mousePressed();
@@ -63,7 +70,7 @@ void mousePressed() {
 
 
 void keyPressed() {
-  if(visNum==-1){
+  if (visNum==-1) {
     visNum=0;
   }
   if (!chooseVis) {
@@ -74,9 +81,9 @@ void keyPressed() {
 }
 void draw() {
   background(255);
-  if(visNum==-1){
-    StartTexts.desenho();
-  }else if (visNum == 0) {
+  if (visNum==-1) {
+      StartTexts.desenho();
+  } else if (visNum == 0) {
     menuvis.display();
   } else if (visNum == 1) {
     textFont(fonteVis1);
