@@ -1,10 +1,11 @@
 class MenuVisAll {
   PFont meta1Fonte, meta2Fonte;
+
   MenuVisAll(PFont fonte1, PFont fonte2) {
     colorMode(RGB, 255, 255, 255);
     rectMode(CORNER);
     meta1Fonte = fonte1;
-    meta2Fonte= fonte2;
+    meta2Fonte = fonte2;
   }
   void textoMeta1() {
     textAlign(CENTER);
@@ -21,7 +22,7 @@ class MenuVisAll {
     text("Visualizador 2", (width/4)*3, height/2);
   }
   boolean mouseHover() {
-    if (mouseX<width/2) {
+    if (mouseX < width/2) {
       return true;
     } else {
       return false;

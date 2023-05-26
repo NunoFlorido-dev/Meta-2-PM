@@ -4,7 +4,7 @@ class MenuVis2 {
   boolean ShowSondAmp;
   Botao[] Botao;
   boolean colideBotao(int a) {
-    if (Botao[a].colide()==true) {
+    if (Botao[a].colide() == true) {
       return true;
     } else {
       return false;
@@ -20,7 +20,7 @@ class MenuVis2 {
   }
   void choseAmp() {
   }
-  void BackToChose(){
+  void BackToChose() {
     visNum = 0;
   }
 }
