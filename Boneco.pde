@@ -21,6 +21,7 @@ class boneco {
 
 
   void eyesrastsetup() {
+    //inicialização e criação das imagens q fazem o efeito de sobra/rasto dos olhos
     for (int i = 0; i < nRasto; i++) {
       aa.add(new PVector(0, 0));
     }
@@ -57,8 +58,10 @@ class boneco {
     aa.get(0).y = altOlhos;
   }
   void eyesmove(float a, float h) {
+    // defenir a largura e a altura dos olhos consoante a amplitude 
     Lolhos = 300 + int(a * 700);
     altOlhos = int(map(Lolhos, 0, olhos.width, 0, olhos.height));
+    //mudança de cor nos olhos consoante o espectro fft
     for (int i = 0; i < olhos.width; i ++) {
       for (int j = 0; j < olhos.height; j++) {
         int loc = i + j * olhos.width;
@@ -69,9 +72,9 @@ class boneco {
               brightness(olhos.pixels[loc]));
             if (beat.isBeat()) {
               if (i < width/2) {
-                y = int(map(dist(i, j, 849, 500), 0, 250, 0, 360));
+                y = int(map(dist(i, j, 849, 480), 0, 250, 0, 360));
               } else {
-                y = int(map(dist(i, j, 1553, 500), 0, 250, 0, 360));
+                y = int(map(dist(i, j, 1553, 480), 0, 250, 0, 360));
               }
               olhos.pixels[loc]=color(y, saturation(olhos.pixels[loc]),
                 brightness(olhos.pixels[loc]));
@@ -91,29 +94,7 @@ class boneco {
       image(imgs[i], width/2 + 5, height - 330, aa.get(i).x, aa.get(i).y);
     }
     image(olhos, width/2+5, height-330, Lolhos, altOlhos);
-
-    for (int i = 0; i < 5; i++) {
-      noStroke();
-      int a = int(map(amp.analyze(), 0, 1, 4, 50));
-      estrela(a, 90 - i * 15, 80 - i * 15, width/2 - 20, height + 30, c1);
-    }
   }
 }
 
 
-void estrela(int nVertices, int raio1, int raio2, int cordsX,
-  int cordsY, color c1) {
-  beginShape();
-  fill (c1);
-  for (int i = 0; i < nVertices; i++) {
-    float ang1 = i*PI*2/(nVertices - 1);
-    float x1 = cordsX+cos(ang1) * raio1;
-    float y1 = cordsY+ sin(ang1) * raio1;
-    float ang2 =(ang1 + (i + 1)* PI * 2/(nVertices - 1))/2;
-    float x2 = cordsX + cos(ang2)*raio2;
-    float y2 = cordsY + sin(ang2) * raio2;
-    curveVertex(x1, y1);
-    curveVertex(x2, y2);
-  }
-  endShape(CLOSE);
-}
