@@ -11,7 +11,6 @@ class ParticleSystem {
   }
 
   void run(float m) {
-    println(particles.size());
     for (int i = particles.size() - 1; i >= 0; i--) {
       Particle p = particles.get(i);
       p.update(m);

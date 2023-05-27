@@ -33,7 +33,7 @@ class Botao {
       rect(cords.x, cords.y, larg, alt);
     }
     textSize(int(alt/3));
-    fill(texto);
+    fill(255);
     text(text, cords.x, cords.y + alt/6);
   }
 }

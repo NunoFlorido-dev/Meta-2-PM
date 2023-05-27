@@ -42,7 +42,6 @@ class Visualizador2 {
     this.amp = new Amplitude(Meta_2.this);
     this.beat = new BeatDetector(Meta_2.this);
     c1 = color(random(150), random(150), random(150));
-    menu = new MenuVis2[2];
     menu[0] = new MenuIn(c1, c1);
     ps = new ParticleSystem();
 

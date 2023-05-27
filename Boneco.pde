@@ -96,5 +96,3 @@ class boneco {
     image(olhos, width/2+5, height-330, Lolhos, altOlhos);
   }
 }
-
-

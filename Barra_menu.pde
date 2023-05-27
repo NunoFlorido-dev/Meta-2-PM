@@ -5,6 +5,7 @@ class BarraMenu extends MenuVis2 {
   Botao AmpSom;
   Botao [] Botao;
   SoundFile music;
+  
   PVector cordsMusic = new PVector(100, 19*height/20);
   PVector cordsAmp = new PVector(width-50, height-150);
   PVector cordsSom = new PVector(width-50, 19*height/20);
@@ -36,7 +37,7 @@ class BarraMenu extends MenuVis2 {
     Botao[1] = new Botao (cordsPause, color(0), color(nFundo),
       stopPause, 20, 20);
     Botao[2] = new Botao(cordsBack, color(0), color(nFundo), "<-", 20, 80);
-    Botao[3] = new Botao(cordsnewSound, color(0), color(nFundo), "New Music",20,80);
+    Botao[3] = new Botao(cordsnewSound, color(0), color(nFundo), "New Music", 20, 80);
   }
 
 
