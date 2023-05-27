@@ -150,7 +150,6 @@ class Visualizador1 {
       removeNotice = false;
     }
     //booleans dos respetivos elementos do menu e o que ocorre se se premir o rato
-
     if (menu.menuativa == true) {
       //mudança da cor do menu
       menu.chooseVis();
@@ -200,16 +199,16 @@ class Visualizador1 {
             musica.pause();
           }
         }
-
-        if (ativaImagem) {
-          if (altImage.insideTheImage(img)) {
-            img.save("modified_image.jpg");
-          }
         }
       }
+       if (ativaImagem) {
+          if (altImage.insideTheImage(img)) {
+            img.save("modified_image.jpg");
+            fill(0);
+            text("imagem guardada",width-100,10);
+          }
     }
   }
-
   void keyPressed() {
     // Escolher versão do visualizador
     int version = key - '0';
