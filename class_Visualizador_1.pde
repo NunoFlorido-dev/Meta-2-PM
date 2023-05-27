@@ -102,8 +102,8 @@ class Visualizador1 {
             fill(40, 50, 70);
 
             if (xfor > x - 10 && xfor < x) {
-              int t=int(map(x, 0, img.width, 0, 360));
-              altImage.getvar(loc, y, x, xfor, a, t, img);
+              int mapHSB=int(map(x, 0, img.width, 0, 360));
+              altImage.getvar(loc, y, x, xfor, a, mapHSB, img);
               if (altImage.nVersão == 1) {
                 altImage.versão1(img);
               } else if (altImage.nVersão == 2) {

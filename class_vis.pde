@@ -14,6 +14,7 @@ class BarrasEspectro {
   }
 
   void display(int inverteX) {
+    rectMode(CORNER);
     colorMode(RGB, 255, 255, 255);
     float xcenter = width/2;
     float ycenter = height/2;

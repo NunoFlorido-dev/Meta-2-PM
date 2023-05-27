@@ -9,7 +9,8 @@ class BarraMenu extends MenuVis2 {
   PVector cordsAmp = new PVector(width-50, height-150);
   PVector cordsSom = new PVector(width-50, 19*height/20);
   PVector cordsPause = new PVector(width/2, height-60);
-  PVector cordsBack = new PVector(50, 19*height/20);
+  PVector cordsBack = new PVector(50, (19*height/20)+20);
+  PVector cordsnewSound = new PVector(50, (19*height/20)-20);
   boolean ShowSondAmp = false;
   String stopPause= "| |";
   boolean MenuOP() {
@@ -26,7 +27,7 @@ class BarraMenu extends MenuVis2 {
     fundo=color(c1);
     nFundo=color(255 - red(fundo), 255 - green(fundo), 255 - blue(fundo));
 
-    Botao= new Botao[3];
+    Botao= new Botao[4];
     MusicPos= new Botao(cordsMusic, color(nFundo),
       color(0), "", 30, 20);
     AmpSom= new Botao(cordsAmp, color(nFundo), color(0), "", 15, 20);
@@ -35,9 +36,11 @@ class BarraMenu extends MenuVis2 {
     Botao[1] = new Botao (cordsPause, color(0), color(nFundo),
       stopPause, 20, 20);
     Botao[2] = new Botao(cordsBack, color(0), color(nFundo), "<-", 20, 80);
+    Botao[3] = new Botao(cordsnewSound, color(0), color(nFundo), "New Music",20,80);
   }
-  void desenho() {
 
+
+  void desenho() {
     if (MenuOP() == true || ShowSondAmp == true) {
       float pos= map(music.position(), 0, music.duration(), 100,
         width-100);
@@ -50,10 +53,8 @@ class BarraMenu extends MenuVis2 {
       MusicPos.cords.x=pos;
       MusicPos.desenha();
 
-      for (int i = 0; i < 3; i++) {
-        Botao[0].desenha();
-        Botao[1].desenha();
-        Botao[2].desenha();
+      for (int i = 0; i < Botao.length; i++) {
+        Botao[i].desenha();
 
         if (music.isPlaying() == true) {
           Botao[1].text = "| |";
@@ -63,7 +64,10 @@ class BarraMenu extends MenuVis2 {
       }
     }
   }
+
+
   void choseAmp() {
+    rectMode(CORNER);
     fill(fundo);
     rect(width - 70, height - 160, 40, 70);
     fill(0);
@@ -79,6 +83,8 @@ class BarraMenu extends MenuVis2 {
       }
     }
   }
+
+
   void jumpMusic() {
     int segs = int(music.position())%60;
     int mins = int(music.position()/60);
@@ -91,13 +97,15 @@ class BarraMenu extends MenuVis2 {
     }
 
     if (mouseX > 100 && mouseX < width-100 && mouseY > 19*height/20 &&
-      mouseY<19*height/20+15) {
+      mouseY < 19 * height/20 + 15) {
       if (mousePressed) {
         float pos= map(mouseX, 100, width-100, 0, music.duration());
         music.jump(pos);
       }
     }
   }
+
+
   boolean colideBotao(int a) {
     if (Botao[a].colide() == true) {
       return true;

@@ -89,6 +89,10 @@ class Visualizador2 {
         menu[0].BackToChose();
         music.stop();
       }
+      if (menu[1].colideBotao(3) == true) {
+        this.music.stop();
+        selectInput("Select a music file to open:", "musicSelected");
+      }
     }
   }
 
@@ -122,7 +126,7 @@ class Visualizador2 {
 
     if (activeMusic && partMenu == 1) {
       float amplitude = amp.analyze();
-      float a = map(amplitude, 0, 1, 5, 40);
+      float a = map(amplitude, 0, 1, 5, 80);
       float a_bright = map(amplitude, 0, 1, 0, 255);
       float[] espectro = fft.analyze();
       background(display_vis);

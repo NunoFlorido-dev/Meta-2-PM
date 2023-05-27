@@ -29,6 +29,7 @@ class MenuVisAll {
     }
   }
   void display() {
+    rectMode(CORNER);
     colorMode(RGB, 255, 255, 255);
     color blue = color(0, 0, 200);
     color blueHover = color(0, 0, 255);
