@@ -10,22 +10,22 @@ boolean chooseVis = true;
 boolean ativaText = true;
 void setup() {
   colorMode(RGB, 255, 255, 255);
-  
+
   fonteVis1 = createFont("Heal The Web A", 16);
   fonteVis2 = createFont("Popboy", 30);
-  
+
   visNum = -1;
   menuvis = new MenuVisAll(fonteVis1, fonteVis2);
   vis1 = new Visualizador1();
   vis2 = new Visualizador2();
   StartTexts = new StartTexts();
-  
+
   if (visNum == 0) {
     chooseVis = true;
   } else {
     chooseVis = false;
   }
-  
+
   frameRate(30);
 }
 
@@ -55,12 +55,12 @@ void imageSelected(File imageFile) {
 
 void mousePressed() {
   boolean ativaMainMenu = false;
- 
+
   if (visNum == -1) {
     ativaMainMenu = !ativaMainMenu;
     visNum = 0;
   }
- 
+
   if (visNum == 0) {
     if (!ativaMainMenu) {
       if (menuvis.mouseHover()) {
@@ -72,7 +72,7 @@ void mousePressed() {
       }
     }
   }
-  
+
   if (!chooseVis) {
     if (visNum == 1) {
       vis1.mousePressed();
@@ -87,7 +87,7 @@ void keyPressed() {
   if (visNum==-1) {
     visNum=0;
   }
-  
+
   if (!chooseVis) {
     if (visNum == 1) {
       vis1.keyPressed();
@@ -98,7 +98,7 @@ void keyPressed() {
 
 void draw() {
   background(255);
-  
+
   if (visNum == -1) {
     StartTexts.desenho();
   } else if (visNum == 0) {

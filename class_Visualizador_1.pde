@@ -2,7 +2,7 @@ class Visualizador1 {
   //classe
   MenuMeta1 menu;
   AltImage altImage;
-  Info info;
+
   //imagem e música
   PImage img;
   SoundFile musica;
@@ -37,7 +37,6 @@ class Visualizador1 {
 
     menu=new MenuMeta1(ativaMusica);
     altImage= new AltImage();
-    info=new Info(ativaMusica);
     amp=new Amplitude(Meta_2.this);
     beat=new BeatDetector(Meta_2.this);
     fft= new FFT(Meta_2.this, 8);
@@ -75,9 +74,7 @@ class Visualizador1 {
   void displayVis() {
     println(altImage.nVersão);
     background(menu.corFundo);
-    if (removeNotice == true) {
-      info.display();
-    }
+
     //inicialização da variável da barra
     float xl;
     //se a imagem está ativada, a imagem é transformada e ela aparece
@@ -199,14 +196,14 @@ class Visualizador1 {
             musica.pause();
           }
         }
-        }
       }
-       if (ativaImagem) {
-          if (altImage.insideTheImage(img)) {
-            img.save("modified_image.jpg");
-            fill(0);
-            text("imagem guardada",width-100,10);
-          }
+    }
+    if (ativaImagem) {
+      if (altImage.insideTheImage(img)) {
+        img.save("modified_image.jpg");
+        fill(0);
+        text("imagem guardada", width-100, 10);
+      }
     }
   }
   void keyPressed() {

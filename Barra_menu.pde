@@ -5,7 +5,7 @@ class BarraMenu extends MenuVis2 {
   Botao AmpSom;
   Botao [] Botao;
   SoundFile music;
-  
+
   PVector cordsMusic = new PVector(100, 19*height/20);
   PVector cordsAmp = new PVector(width-50, height-150);
   PVector cordsSom = new PVector(width-50, 19*height/20);

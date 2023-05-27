@@ -58,7 +58,7 @@ class boneco {
     aa.get(0).y = altOlhos;
   }
   void eyesmove(float a, float h) {
-    // defenir a largura e a altura dos olhos consoante a amplitude 
+    // defenir a largura e a altura dos olhos consoante a amplitude
     Lolhos = 300 + int(a * 700);
     altOlhos = int(map(Lolhos, 0, olhos.width, 0, olhos.height));
     //mudança de cor nos olhos consoante o espectro fft
