@@ -91,7 +91,7 @@ class AltImage {
 
   boolean insideTheImage(PImage img) {
     if (mouseX < width/2 + img.width/2 && mouseX > width/2 - img.width/2 &&
-      mouseY < height/2 + img.height/2 && mouseY > height/2 + img.height/2) {
+      mouseY < height/2 + img.height/2 && mouseY > height/2 - img.height/2) {
       return true;
     } else {
       return false;
